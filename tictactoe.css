@@ -11,9 +11,6 @@ header, footer {
 main {
 	color: rgba(255, 255, 255, 0.87);
 	font-size: 20px;
-/*	width: 100%;
-	height: 100vh;
-	position: relative;*/
 	display: grid;
 	grid-template-rows: auto 1fr;
 	place-items: center;
@@ -25,10 +22,9 @@ main {
 	height: 70vh;
 	background-color: rgba(255, 255, 255, 0.87);
 	display: grid;
-	gap:  1px;
+	gap:  2px;
 	grid-template-rows: repeat(3, 1fr);
 	grid-template-columns: repeat(3, 1fr);
-	/*border: solid 5px #121212;*/
 	margin: 50px 10px;
 }
 
@@ -39,15 +35,11 @@ main {
 	background-color: #121212;
 	display: grid;
 	place-items: center;
-	/*border-radius: 15px;*/
 }
 
 .gameboardSpot:hover {
-	/*background-color: rgba(0, 225, 0, 0.5) !important; */
 	background-color: rgba(50, 50, 50, 1.0) !important;
 	cursor: pointer;
-	/*box-shadow: inset 20px -20px 20px 0px rgba(0, 0, 0, 0.25);*/
-	/*box-shadow: inset 2px 3px 1px #000000, 0px 1px 1px #333;*/
 }
 
 
@@ -59,13 +51,11 @@ main {
 	height: 80px;
 	place-items: center;
 	color: rgba(255, 255, 255, 0.87);
-	/*make sure it falls over the entire game so that the game is no longer clickable (or maybe make sure with js)*/
 }
 
 .namesContainer {
 	width: 100%;
 	height: 80px;
-	background-color: lavenderblush;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
@@ -78,7 +68,10 @@ main {
 	font-family: "sadfa;";
 	font-size: 20px;
 	color: grey;
-	background-color: lavenderblush;
+}
+
+.namesContainer input {
+	background-color: #121212;
 }
 
 .namesContainer i:hover {
@@ -126,7 +119,6 @@ main {
 
 
 .spanB {
-	/*transform: translateY(30px);	*/
    	opacity: 0;
 }
 
@@ -139,23 +131,37 @@ main {
 #resetButton:hover {
 }
 
-/*xxxxxxxxxxxxxx*/
-
-
-/*.underline * {
+.underline#player1, .underline#player1::-webkit-input-placeholder {
 	text-decoration: underline;
-}*/
+}
 
-/*input::-moz-input-placeholder {
-    font-weight: normal;
-    text-decoration: underline;
-    text-decoration-color: rgba(251,175,93,1);  
-}*/
+.underline#player2, .underline#player2::-webkit-input-placeholder {
+	text-decoration: underline;
+}
 
-input::-webkit-input-placeholder {
+.underline#bot {
     text-decoration: underline;
 }
 
-input {
-    text-decoration: underline;	
+#player1, #player1::-webkit-input-placeholder {
+	color: #39ACE7;
 }
+
+#player1::-webkit-input-placeholder, #player2::-webkit-input-placeholder {
+	opacity: 0.8;
+}
+
+
+#player2, #player2::-webkit-input-placeholder {
+	color: #E91E63;
+}
+
+#bot {
+	color: #74E39A;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+

@@ -65,28 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			b.style = "opacity: 0; transform: translateY(30px);";
 		}, 1000);
 	});
-
-
-	//animation for underlining who's turn it is. 
-	const underline = function (element, color) {
-
-		const animation = {
-			p: {
-			    // "text-decoration": underline,
-			    textDecoration: underline, //waarom doet dit het niet??????
-			    fontSize: 20,
-			    color: color,  
-			},
-			o: {
-				duration: 1500,
-          		easing: "linear",
-			}
-		}
-		return element.animate(animation.p, animation.o);
-	}
-
-	const paul = document.querySelector("header");
-	underline(paul, "red")
 	
 
 });

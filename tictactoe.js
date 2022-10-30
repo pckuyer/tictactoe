@@ -35,10 +35,22 @@ const gameFlow = (() => {
 	let playerToMove = player1;
 
 	const changeTurn = function () {
+
+		const displayPlayer1 = document.querySelector("#player1");
+		const displayPlayer2 = document.querySelector("#player2");
+		const displayBot = document.querySelector("#bot");
+
+
 		if (this.playerToMove === player1) {
 			this.playerToMove = player2
+			displayPlayer2.classList.add("underline");
+			displayBot.classList.add("underline");
+			displayPlayer1.classList.remove("underline");
 		} else if (this.playerToMove === player2) {
 			this.playerToMove = player1
+			displayPlayer1.classList.add("underline");
+			displayPlayer2.classList.remove("underline");
+			displayBot.classList.remove("underline");
 		}
 
 		//color underline
