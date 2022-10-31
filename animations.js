@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			b.style = "opacity: 0; transform: translateY(30px);";
 		}, 1000);
 	});
-	
+ 	
 
 });
 

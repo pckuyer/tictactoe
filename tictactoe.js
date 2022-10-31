@@ -104,7 +104,7 @@ const gameFlow = (() => {
 			// alert("draw")
 			const modalBox = document.querySelector(".modalBox"); // heb ik ook meerdere keren moeten declaren
 			modalBox.style.display = "grid";
-			modalBox.style.backgroundColor = "white";
+			modalBox.style.backgroundColor = "grey";
 			modalBox.innerHTML = "Its a draw" + modalBox.innerHTML;
 			document.querySelector("#resetButton").addEventListener("click", function () {
 				gameFlow.resetGame()
@@ -250,9 +250,15 @@ document.addEventListener("DOMContentLoaded", function () {
 		if (player2.biology === "human") {
 			player2 = AI
 			gameFlow.playerToMove = player1
+
+			//changing underline
+			displayPlayer1.classList.add("underline");
+			displayPlayer2.classList.remove("underline");
+			displayBot.classList.remove("underline");
 		} else if (player2.biology === "bot") {
 			player2 = Player("human", "O", "Player 2", "#E91E63");
 			gameFlow.playerToMove = player1;
+			//should underline be changed here as well?
 		}
 	}
 

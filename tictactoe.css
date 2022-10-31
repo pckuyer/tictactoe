@@ -1,10 +1,10 @@
 body {
 	display: grid;
-	grid-template-rows: 100px 1fr 100px;
+	grid-template-rows: 1fr 100px;
 	min-height: 100vh;
 }
 
-header, footer {
+footer {
 	background-color: lightgray;
 }
 
@@ -12,9 +12,15 @@ main {
 	color: rgba(255, 255, 255, 0.87);
 	font-size: 20px;
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: auto 1fr auto;
 	place-items: center;
 	background-color: #121212;
+}
+
+.websiteTitle {
+	position: absolute;
+	left: 15px;	
+	z-index: 3;
 }
 
 .gameboard {
@@ -51,6 +57,7 @@ main {
 	height: 80px;
 	place-items: center;
 	color: rgba(255, 255, 255, 0.87);
+	z-index: 5;
 }
 
 .namesContainer {
@@ -126,9 +133,16 @@ main {
 
 #resetButton {
 	cursor: pointer;
+	padding: 5px 10px;
+	border-radius: 15px;
+	border: solid 2px white;
+	background-color: black;
+	color: white;
+	font-size: 13px;
 }
 
 #resetButton:hover {
+	transform: scale(1.2);
 }
 
 .underline#player1, .underline#player1::-webkit-input-placeholder {

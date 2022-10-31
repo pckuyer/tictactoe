@@ -1,7 +1,10 @@
-
+//two arrays for testing purposes
 const emptyGameArr = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
-const gameArr = ["X", "O", "X", "O", "X", "O", "X", "O","X"];
+const gameArr = [NaN, NaN, NaN, "O", "X", "O", "X", "O","X"];
+const fullGameArr = ["X", "O", "X", "O", "X", "O", "X", "O","X"];
 
+
+//function to visually print board
 const printBoard = function (gameArr) {
 	let chunk;
 	while (gameArr.length > 0) {
@@ -11,8 +14,7 @@ const printBoard = function (gameArr) {
 };
 
 
-// xxxxxxxxxxxxxxxx
-
+//function to value the game
 const valueGame = function (gameArr) {
 
 	//define all the axes
@@ -41,14 +43,51 @@ const valueGame = function (gameArr) {
 	}
 } // end of value game
 
-// console.log(valueGame(gameArr))
-// printBoard(gameArr)
 
-const miniMax = function (gameArr, depth, isMaxPlayer) {
+
+//acutal minimax function  
+//depth deleted for now
+const miniMax = function (gameArr, isMaxPlayer) {
 	//if end of game
-	if (valueGame(emptyGameArr)) {
-		valueGame(emptyGameArr)
-	} else if (){
+	if (valueGame(gameArr)) {
+		console.log(valueGame(gameArr))
+		return valueGame(gameArr)
+	} else {
 
+		if (isMaxPlayer) {
+			
+			//get all empty spots. For each: fill with O, call minimax and restore. 
+			gameArr.map(function(e, i, a) {
+				if(!e){
+					a[i] = "O"
+					console.log(a)
+					miniMax(a, false)
+					a[i] = e
+				}
+			})
+
+		} else if (!isMaxPlayer) {
+			gameArr.map(function(e, i, a) {
+				if(!e){
+					a[i] = "X"
+					console.log(a)
+					miniMax(a, true)
+					a[i] = e
+				}
+			})
+		}
 	}
 }
+
+const result = miniMax(gameArr, true);
+console.log(result);
+
+
+
+
+
+
+
+
+
+
