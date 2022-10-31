@@ -1,6 +1,6 @@
 //two arrays for testing purposes
 const emptyGameArr = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
-const gameArr = [NaN, NaN, NaN, "O", "X", "O", "X", "O","X"];
+const gameArr = [NaN, NaN, NaN, NaN, NaN, "O", "X", "O","X"];
 const fullGameArr = ["X", "O", "X", "O", "X", "O", "X", "O","X"];
 
 
@@ -29,29 +29,37 @@ const valueGame = function (gameArr) {
 		diagonal2 : [2,4,6], 
 	}
 
+	if (!gameArr.includes(NaN)) {
+		return "0";
+	}
 	for (const axis in axes) {
 		if (gameArr[axes[axis][0]] === gameArr[axes[axis][1]] && gameArr[axes[axis][0]] === gameArr[axes[axis][2]] ) {
 			if (gameArr[axes[axis][0]] === "O") {
-			 	return 10;
-			 } else if (gameArr[axes[axis][0]] === "X") {
-			 	return -10;
-			 }
+				return 10;
+			} else if (gameArr[axes[axis][0]] === "X") {
+				return -10;
+			}
 		} 
-	}
-	if (!gameArr.includes(NaN)) {
-		return 0;
 	}
 } // end of value game
 
 
 
+let indecesAndValues = []
+
 //acutal minimax function  
 //depth deleted for now
-const miniMax = function (gameArr, isMaxPlayer) {
+const miniMax = function (index, gameArr, isMaxPlayer) {
 	//if end of game
 	if (valueGame(gameArr)) {
-		console.log(valueGame(gameArr))
-		return valueGame(gameArr)
+		
+		//create array of 
+		let obj = {}
+		obj["index"] = index 
+		obj["value"] = valueGame(gameArr)
+		indecesAndValues.push(obj)
+
+
 	} else {
 
 		if (isMaxPlayer) {
@@ -60,8 +68,8 @@ const miniMax = function (gameArr, isMaxPlayer) {
 			gameArr.map(function(e, i, a) {
 				if(!e){
 					a[i] = "O"
-					console.log(a)
-					miniMax(a, false)
+					let index = i
+					miniMax(index, a, false)
 					a[i] = e
 				}
 			})
@@ -70,19 +78,25 @@ const miniMax = function (gameArr, isMaxPlayer) {
 			gameArr.map(function(e, i, a) {
 				if(!e){
 					a[i] = "X"
-					console.log(a)
-					miniMax(a, true)
+					miniMax(index, a, true)
 					a[i] = e
 				}
 			})
 		}
 	}
-}
+	//finding max of indecesAndValues
+	const max = indecesAndValues.reduce(function(prev, current) {
+   		return (prev.value > current.value) ? prev : current
+	}) 
 
-const result = miniMax(gameArr, true);
+	return the index of the max value
+	return max.index
+
+} // end of minimax function
+
+
+const result = miniMax(NaN, gameArr, true);
 console.log(result);
-
-
 
 
 
