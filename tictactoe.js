@@ -185,14 +185,24 @@ const AI = (() => {
 			return a
 		}, [])	
 
-		const random = Math.floor(Math.random() * arr.length)
-		const selected = arr[random]
-		gameboard.playerMoves[selected] = symbol
+
+		//making a random move
+		// const random = Math.floor(Math.random() * arr.length)
+		// const selected = arr[random]
+		// gameboard.playerMoves[selected] = symbol
+
+		//insert the smart bot here
+		const result = miniMax(NaN, gameboard.playerMoves, true);
+		gameboard.playerMoves[result] = symbol;
+
 
 		// color the mark. misschien niet zo netjes dat write to board in gameflow zit en color the mark hier?
 		const gameboardSpots = document.querySelectorAll('.gameboardSpot');
-		gameboardSpots[selected].style.color = color;
-		gameboardSpots[selected].style.pointerEvents = "none";
+		// gameboardSpots[selected].style.color = color;
+		// gameboardSpots[selected].style.pointerEvents = "none";
+
+		gameboardSpots[result].style.color = color;
+		gameboardSpots[result].style.pointerEvents = "none";
 
 	}
 
@@ -251,6 +261,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			player2 = AI
 			gameFlow.playerToMove = player1
 
+			
+			//this is redeclaration
+			const displayPlayer1 = document.querySelector("#player1");
+			const displayPlayer2 = document.querySelector("#player2");
+			const displayBot = document.querySelector("#bot");
+
+
 			//changing underline
 			displayPlayer1.classList.add("underline");
 			displayPlayer2.classList.remove("underline");
@@ -288,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 })
-
 
 
 

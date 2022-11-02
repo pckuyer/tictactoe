@@ -89,14 +89,14 @@ const miniMax = function (index, gameArr, isMaxPlayer) {
    		return (prev.value > current.value) ? prev : current
 	}) 
 
-	return the index of the max value
+	// return the index of the max value
 	return max.index
 
 } // end of minimax function
 
-
-const result = miniMax(NaN, gameArr, true);
-console.log(result);
+// log the result
+// const result = miniMax(NaN, gameArr, true);
+// console.log(result);
 
 
 
