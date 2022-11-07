@@ -29,7 +29,7 @@ const valueGame = function (gameArr) {
 
 
 
-const miniMax = function (gameArr, isMaxPlayer) {
+const miniMax = function (gameArr, isMaxPlayer, depth = 0) {
 
 	if (valueGame(gameArr)) {
 		return {"value" : valueGame(gameArr)}
@@ -37,24 +37,24 @@ const miniMax = function (gameArr, isMaxPlayer) {
 	} else {
 
 		const values = []
+		depth++
 
 		//max player
 		if (isMaxPlayer) {
 			
-			// const values = []
-
 			gameArr.forEach((e,i,a) => {
 				if (!e){
 					a[i] = "O"
 					const obj = {
 						"index" : i,
-						"value": miniMax(a.slice(0), false).value
+						"value": miniMax(a.slice(0), false).value - depth
 					}
 					values.push(obj)
 					a[i] = NaN
 				}
 			})
 
+			// console.log(values);
 			const max = values.reduce((x, y) => x.value > y.value ? x : y);
 			return max
 
@@ -63,20 +63,18 @@ const miniMax = function (gameArr, isMaxPlayer) {
 		//min player
 		} else if (!isMaxPlayer) {
 
-			// const values = []
-
 			gameArr.forEach((e,i,a) => {
 				if (!e){
 					a[i] = "X"
 					const obj = {
 						"index" : i,
-						"value": miniMax(a.slice(0), true).value
+						"value": miniMax(a.slice(0), true).value - depth
 					}
 					values.push(obj)
 					a[i] = NaN
 				}
 			})
-			
+			// console.log(values);
 			const min = values.reduce((x, y) => x.value < y.value ? x : y);
 			return min
 		}
