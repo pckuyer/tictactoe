@@ -192,7 +192,7 @@ const AI = (() => {
 		// gameboard.playerMoves[selected] = symbol
 
 		//insert the smart bot here
-		const result = miniMax(NaN, gameboard.playerMoves, true);
+		const result = parseInt(miniMax(gameboard.playerMoves, true).index);
 		gameboard.playerMoves[result] = symbol;
 
 

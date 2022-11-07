@@ -1,19 +1,3 @@
-//two arrays for testing purposes
-const emptyGameArr = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
-const gameArr = [NaN, NaN, NaN, NaN, NaN, "O", "X", "O","X"];
-const fullGameArr = ["X", "O", "X", "O", "X", "O", "X", "O","X"];
-
-
-//function to visually print board
-const printBoard = function (gameArr) {
-	let chunk;
-	while (gameArr.length > 0) {
-		chunk = gameArr.splice(0,3)
-		console.log(chunk)
-	}
-};
-
-
 //function to value the game
 const valueGame = function (gameArr) {
 
@@ -29,9 +13,6 @@ const valueGame = function (gameArr) {
 		diagonal2 : [2,4,6], 
 	}
 
-	if (!gameArr.includes(NaN)) {
-		return "0";
-	}
 	for (const axis in axes) {
 		if (gameArr[axes[axis][0]] === gameArr[axes[axis][1]] && gameArr[axes[axis][0]] === gameArr[axes[axis][2]] ) {
 			if (gameArr[axes[axis][0]] === "O") {
@@ -41,63 +22,67 @@ const valueGame = function (gameArr) {
 			}
 		} 
 	}
+	if (!gameArr.includes(NaN)) {
+		return "0";
+	}
 } // end of value game
 
 
 
-let indecesAndValues = []
+const miniMax = function (gameArr, isMaxPlayer) {
 
-//acutal minimax function  
-//depth deleted for now
-const miniMax = function (index, gameArr, isMaxPlayer) {
-	//if end of game
 	if (valueGame(gameArr)) {
-		
-		//create array of 
-		let obj = {}
-		obj["index"] = index 
-		obj["value"] = valueGame(gameArr)
-		indecesAndValues.push(obj)
-
+		return {"value" : valueGame(gameArr)}
 
 	} else {
 
+		const values = []
+
+		//max player
 		if (isMaxPlayer) {
 			
-			//get all empty spots. For each: fill with O, call minimax and restore. 
-			gameArr.map(function(e, i, a) {
-				if(!e){
+			// const values = []
+
+			gameArr.forEach((e,i,a) => {
+				if (!e){
 					a[i] = "O"
-					let index = i
-					miniMax(index, a, false)
-					a[i] = e
+					const obj = {
+						"index" : i,
+						"value": miniMax(a.slice(0), false).value
+					}
+					values.push(obj)
+					a[i] = NaN
 				}
 			})
 
+			const max = values.reduce((x, y) => x.value > y.value ? x : y);
+			return max
+
+
+
+		//min player
 		} else if (!isMaxPlayer) {
-			gameArr.map(function(e, i, a) {
-				if(!e){
+
+			// const values = []
+
+			gameArr.forEach((e,i,a) => {
+				if (!e){
 					a[i] = "X"
-					miniMax(index, a, true)
-					a[i] = e
+					const obj = {
+						"index" : i,
+						"value": miniMax(a.slice(0), true).value
+					}
+					values.push(obj)
+					a[i] = NaN
 				}
 			})
+			
+			const min = values.reduce((x, y) => x.value < y.value ? x : y);
+			return min
 		}
-	}
-	//finding max of indecesAndValues
-	const max = indecesAndValues.reduce(function(prev, current) {
-   		return (prev.value > current.value) ? prev : current
-	}) 
 
-	// return the index of the max value
-	return max.index
-
+	}//end of else (not a value)
 } // end of minimax function
-
-// log the result
-// const result = miniMax(NaN, gameArr, true);
-// console.log(result);
-
 
 
 
