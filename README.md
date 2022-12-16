@@ -1,2 +1,2 @@
 # tictactoe
-see live site at paulkuyer.com/tictactoe
+see live site at https://paulkuyer.com/tictactoe
